@@ -1,0 +1,91 @@
+install docker 
+go to website: get.docker.com
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+
+docker --version
+
+terminal1
+docker run docker/whalesay cowsay prajwal
+
+docker pull ubuntu:latest
+docker images
+docker run -it ubuntu:latest bash
+
+apt update
+apt install apache2 
+cd /var/www/html
+mv index.html index.backup
+ls
+
+apt install nano
+nano index.html
+
+<html>
+<title> First Page </title>
+<body bgcolor="pink">
+Our Home Page
+</body>
+</html>
+
+
+
+service apache2 restart
+service apache2 status
+
+open new termainal2 
+docker images
+docker tag e4c58958181a(image id) prajwal0211(username)/ubuntu:latest
+
+open new terminal3 
+docker ps
+docker commit 95d908f1a732(container id) prajwal0211/ubuntu:latest
+
+go to terminal 1
+
+exit
+docker run -itd -p 8888:80 --name cid1 prajwal0211/ubuntu_1:v1
+ufw allow 8888
+docker exec -it 95d908f1a732(new conatiner id) service apache2 restart
+
+run in browser
+
+http://localhost:8888
+
+
+
+
+
+
+
+
+
+exp9
+open new terminal4
+mkdir docker1
+cd docker1
+nano Dockerfile
+
+FROM ubuntu:latest
+MAINTAINER "PRAJWAL"
+RUN apt update -y
+RUN apt install nginx -y
+EXPOSE 80
+COPY index.html /var/www/html/index.html
+CMD ["nginx", "-g", "daemon off;"]
+
+
+nano index.html
+
+<html>
+<title>
+Created
+</title>
+<body>
+Hello World!
+</body>
+</html>
+
+
+docker build -t siesnginxservers .
+docker run -itd -p 8989:80 siesgnxservers 
